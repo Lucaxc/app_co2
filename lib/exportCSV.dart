@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:app_co2/DataVisualization.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 int CSV_count = 0;
 
@@ -54,14 +55,35 @@ class ExportCSV extends StatelessWidget {
   }
 }
 
-/* Future<void> writeCSV (String csv) async {
+/* class ExportCsv {
+  final String csv;
+  ExportCsv({required this.csv});
 
-String dir = (await getApplicationDocumentsDirectory()).path;
-  String path = "$dir/CO2_data.csv";
+  downloadData() {
+    AnchorElement(href: "data:text/plain;charset=utf-8,$csv")
+      ..setAttribute("download", "data.csv")
+      ..click();
+  }
+} */
 
+Future<String> getFilePath() async {
+  Directory appDocumentsDirectory =
+      await getApplicationDocumentsDirectory(); // 1
+  String appDocumentsPath = appDocumentsDirectory.path; // 2
+  String filePath = '$appDocumentsPath/demoTextFile.txt'; // 3
 
-File file = File(fileBits, fileName)
+  return filePath;
+}
 
-file.writeAsString(csv);
-} 
- */
+void saveFile() async {
+  File file = File(await getFilePath()); // 1
+  file.writeAsString(
+      "This is my demo text that will be saved to : demoTextFile.txt"); // 2
+}
+
+void readFile() async {
+  File file = File(await getFilePath()); // 1
+  String fileContent = await file.readAsString(); // 2
+
+  print('File Content: $fileContent');
+}
