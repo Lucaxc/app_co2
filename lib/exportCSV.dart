@@ -31,7 +31,7 @@ class ExportCSV extends StatelessWidget {
                     Text('Recorded CO2 data ${CSV_count.toString()} - ${date}'),
                 trailing: IconButton(
                   icon: Icon(Icons.download),
-                  onPressed: () {},
+                  onPressed: () => saveFile(csv),
                 ),
               ),
               Text(csv.toString())
@@ -55,30 +55,17 @@ class ExportCSV extends StatelessWidget {
   }
 }
 
-/* class ExportCsv {
-  final String csv;
-  ExportCsv({required this.csv});
-
-  downloadData() {
-    AnchorElement(href: "data:text/plain;charset=utf-8,$csv")
-      ..setAttribute("download", "data.csv")
-      ..click();
-  }
-} */
-
 Future<String> getFilePath() async {
-  Directory appDocumentsDirectory =
-      await getApplicationDocumentsDirectory(); // 1
-  String appDocumentsPath = appDocumentsDirectory.path; // 2
-  String filePath = '$appDocumentsPath/demoTextFile.txt'; // 3
+  Directory? appDocumentsDirectory = await getExternalStorageDirectory(); // 1
+  String appDocumentsPath = appDocumentsDirectory!.path; // 2
+  String filePath = '$appDocumentsPath/CO2_data.csv'; // 3
 
   return filePath;
 }
 
-void saveFile() async {
+void saveFile(String csv) async {
   File file = File(await getFilePath()); // 1
-  file.writeAsString(
-      "This is my demo text that will be saved to : demoTextFile.txt"); // 2
+  file.writeAsString(csv); // 2
 }
 
 void readFile() async {

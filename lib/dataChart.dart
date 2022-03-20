@@ -11,13 +11,6 @@ class DataChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* final List<ChartData> chartData = [
-      ChartData(2010, 35),
-      ChartData(2011, 28),
-      ChartData(2012, 34),
-      ChartData(2013, 32),
-      ChartData(2014, 40)
-    ]; */
     return Scaffold(
         appBar: buildAppBar(),
         backgroundColor: Colors.white,
