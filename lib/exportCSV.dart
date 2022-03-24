@@ -56,7 +56,8 @@ class ExportCSV extends StatelessWidget {
 }
 
 Future<String> getFilePath() async {
-  Directory? appDocumentsDirectory = await getExternalStorageDirectory(); // 1
+  Directory? appDocumentsDirectory = await getExternalStorageDirectory();
+  print(appDocumentsDirectory?.path); // 1
   String appDocumentsPath = appDocumentsDirectory!.path; // 2
   String filePath = '$appDocumentsPath/CO2_data.csv'; // 3
 

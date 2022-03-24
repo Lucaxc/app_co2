@@ -71,7 +71,8 @@ class DataVisualization extends StatelessWidget {
     return Scaffold(
         appBar: buildAppBar(),
         backgroundColor: Colors.white,
-        body: SafeArea(
+        body: SingleChildScrollView(
+            child: SafeArea(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -436,7 +437,7 @@ class DataVisualization extends StatelessWidget {
               )
             ],
           ),
-        ));
+        )));
   }
 
   AppBar buildAppBar() {
