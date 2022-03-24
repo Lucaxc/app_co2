@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EasterEgg extends StatelessWidget {
+  const EasterEgg({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,14 +17,14 @@ class EasterEgg extends StatelessWidget {
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(
+                      SizedBox(
                           height: (MediaQuery.of(context).size.width) * 2 / 5,
                           width: (MediaQuery.of(context).size.width) * 2 / 5,
                           child: Positioned(
                             top: 100,
                             child: Image.asset("assets/images/CV2.jpg"),
                           )),
-                      Container(
+                      SizedBox(
                         height: (MediaQuery.of(context).size.width) * 4 / 5,
                         width: (MediaQuery.of(context).size.width) * 4 / 5,
                         child: Text(

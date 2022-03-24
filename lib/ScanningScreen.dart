@@ -32,8 +32,10 @@ class ScanningScreen extends StatelessWidget {
                       fontSize: 100,
                       fontWeight: FontWeight.w700,
                     )),
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EasterEgg()))),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EasterEgg()))),
             Spacer(),
             Text(
                 "Please use this device\n always in a controlled\n enviroment. Press the\n button below to\n connect to the device",
@@ -50,7 +52,7 @@ class ScanningScreen extends StatelessWidget {
               press: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DevicesScreen())),
               color: Color(0xFFFBC02D),
-              minWidth: 300.0,
+              minWidth: (MediaQuery.of(context).size.width) * 5 / 7,
             ),
             Spacer(),
           ],

@@ -13,12 +13,6 @@ import 'package:clock/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:csv/csv.dart';
 
-/* class time {
-  time(this.time_value);
-
-  Uint8 time_value;
-}
- */
 int time = 0;
 int CO2Data_000 = 0;
 int CO2Data_00 = 0;
@@ -116,314 +110,284 @@ class DataVisualization extends StatelessWidget {
 
                         //Visual return
                         return Container(
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(children: <Widget>[
-                                  Container(
-                                    color: Colors.amber,
-                                    height: 10,
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
-                                  //Text(' '),
+                            //child: SingleChildScrollView(
+                            //  scrollDirection: Axis.vertical,
+                            child: Column(children: <Widget>[
+                          Container(
+                            color: Colors.amber,
+                            height: 10,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          //Text(' '),
 
-                                  Text('Measured CO2 value',
-                                      style: GoogleFonts.catamaran(
-                                        textStyle: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 1, 38, 68)),
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w500,
-                                      )),
+                          Text('Measured CO2 value',
+                              style: GoogleFonts.catamaran(
+                                textStyle: TextStyle(
+                                    color: Color.fromARGB(255, 1, 38, 68)),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
+                              )),
 
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(CO2Data_2.toString(),
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 26, 201, 19)),
-                                              fontSize: 70,
-                                              fontWeight: FontWeight.w700,
-                                            )),
-                                        Text(' ppm',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 26, 201, 19)),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                            ))
-                                      ]),
-
-                                  Text(formattedDate.toString(),
-                                      style: GoogleFonts.catamaran(
-                                        textStyle: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 1, 38, 68)),
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w500,
-                                      )),
-
-                                  Container(
-                                    color: Colors.amber,
-                                    height: 10,
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
-
-                                  Text(''),
-
-                                  Text('Previous values',
-                                      style: GoogleFonts.catamaran(
-                                        textStyle: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 1, 38, 68)),
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w700,
-                                      )),
-
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(CO2Data_1.toString(),
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 1, 38, 68)),
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w700,
-                                            )),
-                                        Text(' ppm',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 1, 38, 68)),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                            ))
-                                      ]),
-
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(CO2Data_0.toString(),
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color:
-                                                      //Color.fromARGB(255, 6, 60, 104)),
-                                                      Color.fromARGB(
-                                                          255, 14, 78, 131)),
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w700,
-                                            )),
-                                        Text(' ppm',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 14, 78, 131)),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                            ))
-                                      ]),
-
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(CO2Data_00.toString(),
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color:
-                                                      //Color.fromARGB(255, 14, 78, 131)),
-                                                      Color.fromARGB(
-                                                          255, 28, 105, 168)),
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w700,
-                                            )),
-                                        Text(' ppm',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 28, 105, 168)),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                            ))
-                                      ]),
-
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(CO2Data_000.toString(),
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: //Color.fromARGB(255, 28, 105, 168)
-                                                      Color.fromARGB(
-                                                          255, 67, 152, 221)),
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w700,
-                                            )),
-                                        Text(' ppm',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 67, 152, 221)),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                            ))
-                                      ]),
-
-                                  Text(''),
-
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      MaterialButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(40))),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: screen_height / 100,
-                                              horizontal: screen_width / 8),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(CO2Data_2.toString(),
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
                                           color:
-                                              Color.fromARGB(255, 9, 56, 211),
-                                          minWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                          disabledColor: Color.fromARGB(
-                                              255, 194, 167, 101),
-                                          onPressed: () => Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ExportCSV(
-                                                        dataForCSV: dataForCSV,
-                                                        date: formattedDate,
-                                                      ))),
-                                          child: Text(
-                                            '  EXPORT CSV  ',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          )),
-                                      Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              15),
-                                      MaterialButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(40))),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: screen_height / 100,
-                                              horizontal: screen_width / 40),
-                                          color: Color(0xFFFBC02D),
-                                          minWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                          disabledColor: Color.fromARGB(
-                                              255, 194, 167, 101),
-                                          onPressed: () => Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DataChart(
-                                                        dataForPlot:
-                                                            dataForPlot,
-                                                      ))),
-                                          child: Text(
-                                            'DATA CHART VISUALIZATION',
-                                            style: GoogleFonts.catamaran(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          )),
-                                    ],
-                                  ),
-                                  MaterialButton(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(40))),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: screen_height / 100,
-                                          horizontal: screen_width / 8),
-                                      color: Color.fromARGB(255, 9, 211,
-                                          9), //245, 23, 81, 123, 81 //255, 211, 117, 9
-                                      minWidth:
-                                          MediaQuery.of(context).size.width / 3,
-                                      disabledColor:
-                                          Color.fromARGB(255, 194, 167, 101),
-                                      onPressed: () => showDialog<String>(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                AlertDialog(
-                                              elevation: 10,
-                                              title: Text('ATTENTION',
-                                                  style: GoogleFonts.catamaran(
-                                                    textStyle: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 38, 68)),
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.w700,
-                                                  )),
-                                              content: Text(
-                                                  'Are you sure you want to delete CSV data?',
-                                                  style: GoogleFonts.catamaran(
-                                                    textStyle: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 38, 68)),
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
-                                                  )),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, 'Cancel'),
-                                                  child: const Text('Cancel'),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () => clearData(
-                                                      dataForCSV,
-                                                      dataForPlot,
-                                                      context,
-                                                      time),
-                                                  child: const Text('OK'),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                      child: Text(
-                                        '  CLEAR CSV DATA  ',
-                                        style: GoogleFonts.catamaran(
-                                          textStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      )),
+                                              Color.fromARGB(255, 26, 201, 19)),
+                                      fontSize: 70,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                                Text(' ppm',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 26, 201, 19)),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ))
+                              ]),
 
-                                  //Text(''),
-                                ])));
+                          Text(formattedDate.toString(),
+                              style: GoogleFonts.catamaran(
+                                textStyle: TextStyle(
+                                    color: Color.fromARGB(255, 1, 38, 68)),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
+                              )),
+
+                          Container(
+                            color: Colors.amber,
+                            height: 10,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+
+                          Text(''),
+
+                          Text('Previous values',
+                              style: GoogleFonts.catamaran(
+                                textStyle: TextStyle(
+                                    color: Color.fromARGB(255, 1, 38, 68)),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700,
+                              )),
+
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(CO2Data_1.toString(),
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 1, 38, 68)),
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                                Text(' ppm',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 1, 38, 68)),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ))
+                              ]),
+
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(CO2Data_0.toString(),
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              //Color.fromARGB(255, 6, 60, 104)),
+                                              Color.fromARGB(255, 14, 78, 131)),
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                                Text(' ppm',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 14, 78, 131)),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ))
+                              ]),
+
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(CO2Data_00.toString(),
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color:
+                                              //Color.fromARGB(255, 14, 78, 131)),
+                                              Color.fromARGB(
+                                                  255, 28, 105, 168)),
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                                Text(' ppm',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 28, 105, 168)),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ))
+                              ]),
+
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(CO2Data_000.toString(),
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color: //Color.fromARGB(255, 28, 105, 168)
+                                              Color.fromARGB(
+                                                  255, 67, 152, 221)),
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                                Text(' ppm',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 67, 152, 221)),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ))
+                              ]),
+
+                          Text(''),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(40))),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: screen_height / 100,
+                                      horizontal: screen_width / 8),
+                                  color: Color.fromARGB(255, 9, 56, 211),
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 3,
+                                  disabledColor:
+                                      Color.fromARGB(255, 194, 167, 101),
+                                  onPressed: () => Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                          builder: (context) => ExportCSV(
+                                                dataForCSV: dataForCSV,
+                                                date: formattedDate,
+                                              ))),
+                                  child: Text(
+                                    '  EXPORT CSV  ',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  )),
+                              Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 15),
+                              MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(40))),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: screen_height / 100,
+                                      horizontal: screen_width / 40),
+                                  color: Color(0xFFFBC02D),
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 3,
+                                  disabledColor:
+                                      Color.fromARGB(255, 194, 167, 101),
+                                  onPressed: () => Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                          builder: (context) => DataChart(
+                                                dataForPlot: dataForPlot,
+                                              ))),
+                                  child: Text(
+                                    'DATA CHART VISUALIZATION',
+                                    style: GoogleFonts.catamaran(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  )),
+                            ],
+                          ),
+                          MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40))),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screen_height / 100,
+                                  horizontal: screen_width / 8),
+                              color: Color.fromARGB(255, 9, 211,
+                                  9), //245, 23, 81, 123, 81 //255, 211, 117, 9
+                              minWidth: MediaQuery.of(context).size.width / 3,
+                              disabledColor: Color.fromARGB(255, 194, 167, 101),
+                              onPressed: () => showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      elevation: 10,
+                                      title: Text('ATTENTION',
+                                          style: GoogleFonts.catamaran(
+                                            textStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 1, 38, 68)),
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w700,
+                                          )),
+                                      content: Text(
+                                          'Are you sure you want to delete CSV data?',
+                                          style: GoogleFonts.catamaran(
+                                            textStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 1, 38, 68)),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          )),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Cancel'),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => clearData(dataForCSV,
+                                              dataForPlot, context, time),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              child: Text(
+                                '  CLEAR CSV DATA  ',
+                                style: GoogleFonts.catamaran(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              )),
+
+                          //Text(''),
+                        ]));
                       })
                 ],
               )
