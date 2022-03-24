@@ -76,6 +76,7 @@ flutter:
     - assets/co21.png
     - assets/Intrologo.jpg
     - assets/Logo_Politecnico_Milano.png
+    - assets/CV2.jpg
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.
     # For details regarding adding assets from package dependencies, see

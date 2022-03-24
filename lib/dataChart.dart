@@ -21,7 +21,32 @@ class DataChart extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                //Text(dataForPlot.toString()),
+                Text('Measured CO2 value',
+                    style: GoogleFonts.catamaran(
+                      textStyle:
+                          TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                    )),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(CO2Data_2.toString(),
+                          style: GoogleFonts.catamaran(
+                            textStyle: TextStyle(
+                                color: Color.fromARGB(255, 26, 201, 19)),
+                            fontSize: 70,
+                            fontWeight: FontWeight.w700,
+                          )),
+                      Text(' ppm',
+                          style: GoogleFonts.catamaran(
+                            textStyle: TextStyle(
+                                color: Color.fromARGB(255, 26, 201, 19)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ))
+                    ]),
                 Container(
                   child: SfCartesianChart(series: <ChartSeries>[
                     // Renders line chart
@@ -31,9 +56,7 @@ class DataChart extends StatelessWidget {
                         yValueMapper: (ChartData data, _) => data.y)
                   ]),
                 ),
-
                 Text(''),
-
                 MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(40))),

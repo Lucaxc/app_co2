@@ -27,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: MediaQuery.of(context).size.width / 9,
                 fontWeight: FontWeight.w700,
               )),
-          Text("Provided by LaRes Lab, PoliMi",
+          Text("Provided by LaRes Lab",
               textAlign: TextAlign.center,
               style: GoogleFonts.catamaran(
                 textStyle: TextStyle(

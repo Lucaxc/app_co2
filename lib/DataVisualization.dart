@@ -78,14 +78,6 @@ class DataVisualization extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: [
-                  /*  Spacer(flex: 1),
-                  Text('Service'),
-                  Text(
-                      '0x${service.uuid.toString().toUpperCase().substring(4, 8)}'),
-                  Text('Characteristic'),
-                  Text(
-                      '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}'),
-                  Spacer(flex: 1), */
                   StreamBuilder<List<int>>(
                       stream: characteristic.value,
                       initialData: characteristic.lastValue,
