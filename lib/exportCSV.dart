@@ -4,6 +4,7 @@ import 'package:app_co2/DataVisualization.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:ext_storage/ext_storage.dart';
 
 int CSV_count = 0;
 
@@ -31,7 +32,7 @@ class ExportCSV extends StatelessWidget {
                     Text('Recorded CO2 data ${CSV_count.toString()} - ${date}'),
                 trailing: IconButton(
                   icon: Icon(Icons.download),
-                  onPressed: () => saveFile(csv),
+                  onPressed: () => saveFile_correct(csv),
                 ),
               ),
               Text(csv.toString())
@@ -74,4 +75,14 @@ void readFile() async {
   String fileContent = await file.readAsString(); // 2
 
   print('File Content: $fileContent');
+}
+
+void saveFile_correct(String csv) async {
+  String dir = await ExtStorage.getExternalStoragePublicDirectory(
+      ExtStorage.DIRECTORY_DOWNLOADS);
+  print("dir $dir");
+  String file = "$dir";
+
+  File f = File(file + "/filename.csv");
+  f.writeAsString(csv);
 }

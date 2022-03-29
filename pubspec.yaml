@@ -41,6 +41,7 @@ dependencies:
   path_provider: ^2.0.9
   file_picker: ^4.5.1
   permission_handler: ^9.2.0
+  ext_storage: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +61,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets\images\playstore.png'
+  image_path: 'assets\images\Logo_play.png'
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
