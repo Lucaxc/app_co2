@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:math';
+import 'dart:ui';
 import 'package:app_co2/Visual_test.dart';
 import 'package:app_co2/visual.dart';
 import 'package:app_co2/exportCSV.dart';
@@ -30,6 +31,13 @@ ChartData CO2_for_plot = ChartData(0, 0);
 
 double screen_width = 1.0;
 double screen_height = 1.0;
+
+ViewConfiguration createViewConfiguration() {
+  final double devicePixelRatio = window.devicePixelRatio;
+  return ViewConfiguration(
+    devicePixelRatio: devicePixelRatio,
+  );
+}
 
 //List<int> CO2_array = [];
 //final List<int> charCodes = const [97, 98, 99, 100];
@@ -62,6 +70,7 @@ class DataVisualization extends StatelessWidget {
   Widget build(BuildContext context) {
     screen_width = MediaQuery.of(context).size.width;
     screen_height = MediaQuery.of(context).size.height;
+    double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
         appBar: buildAppBar(),
         backgroundColor: Colors.white,
@@ -107,7 +116,8 @@ class DataVisualization extends StatelessWidget {
 
                         String csv =
                             const ListToCsvConverter().convert(dataForCSV);
-
+                        print('sasas');
+                        print(devicePixelRatio);
                         //Visual return
                         return Container(
                             //child: SingleChildScrollView(
@@ -115,7 +125,7 @@ class DataVisualization extends StatelessWidget {
                             child: Column(children: <Widget>[
                           Container(
                             color: Colors.amber,
-                            height: 10,
+                            height: screen_height / 80,
                             width: MediaQuery.of(context).size.width,
                           ),
                           //Text(' '),
@@ -137,7 +147,8 @@ class DataVisualization extends StatelessWidget {
                                       textStyle: TextStyle(
                                           color:
                                               Color.fromARGB(255, 26, 201, 19)),
-                                      fontSize: 70,
+                                      //fontSize: 70,
+                                      fontSize: screen_height / 11,
                                       fontWeight: FontWeight.w700,
                                     )),
                                 Text(' ppm',
@@ -145,7 +156,8 @@ class DataVisualization extends StatelessWidget {
                                       textStyle: TextStyle(
                                           color:
                                               Color.fromARGB(255, 26, 201, 19)),
-                                      fontSize: 20,
+                                      //fontSize: 20,
+                                      fontSize: screen_height / 30,
                                       fontWeight: FontWeight.w700,
                                     ))
                               ]),
@@ -160,7 +172,8 @@ class DataVisualization extends StatelessWidget {
 
                           Container(
                             color: Colors.amber,
-                            height: 10,
+                            height: screen_height / 80,
+                            //height: 10,
                             width: MediaQuery.of(context).size.width,
                           ),
 
@@ -183,7 +196,8 @@ class DataVisualization extends StatelessWidget {
                                       textStyle: TextStyle(
                                           color:
                                               Color.fromARGB(255, 1, 38, 68)),
-                                      fontSize: 50,
+                                      //fontSize: 50,
+                                      fontSize: screen_height / 17,
                                       fontWeight: FontWeight.w700,
                                     )),
                                 Text(' ppm',
@@ -206,7 +220,7 @@ class DataVisualization extends StatelessWidget {
                                           color:
                                               //Color.fromARGB(255, 6, 60, 104)),
                                               Color.fromARGB(255, 14, 78, 131)),
-                                      fontSize: 50,
+                                      fontSize: screen_height / 17,
                                       fontWeight: FontWeight.w700,
                                     )),
                                 Text(' ppm',
@@ -230,7 +244,7 @@ class DataVisualization extends StatelessWidget {
                                               //Color.fromARGB(255, 14, 78, 131)),
                                               Color.fromARGB(
                                                   255, 28, 105, 168)),
-                                      fontSize: 50,
+                                      fontSize: screen_height / 17,
                                       fontWeight: FontWeight.w700,
                                     )),
                                 Text(' ppm',
@@ -253,7 +267,7 @@ class DataVisualization extends StatelessWidget {
                                           color: //Color.fromARGB(255, 28, 105, 168)
                                               Color.fromARGB(
                                                   255, 67, 152, 221)),
-                                      fontSize: 50,
+                                      fontSize: screen_height / 17,
                                       fontWeight: FontWeight.w700,
                                     )),
                                 Text(' ppm',
@@ -294,7 +308,10 @@ class DataVisualization extends StatelessWidget {
                                     style: GoogleFonts.catamaran(
                                       textStyle: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              36,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   )),
@@ -323,7 +340,11 @@ class DataVisualization extends StatelessWidget {
                                     style: GoogleFonts.catamaran(
                                       textStyle: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          //fontSize: 12,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              36,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   )),
@@ -381,7 +402,9 @@ class DataVisualization extends StatelessWidget {
                                 style: GoogleFonts.catamaran(
                                   textStyle: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 12,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              36,
                                       fontWeight: FontWeight.w700),
                                 ),
                               )),

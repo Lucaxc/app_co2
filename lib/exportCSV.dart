@@ -4,7 +4,7 @@ import 'package:app_co2/DataVisualization.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:ext_storage/ext_storage.dart';
+import 'package:external_path/external_path.dart';
 
 int CSV_count = 0;
 
@@ -78,8 +78,8 @@ void readFile() async {
 }
 
 void saveFile_correct(String csv) async {
-  String dir = await ExtStorage.getExternalStoragePublicDirectory(
-      ExtStorage.DIRECTORY_DOWNLOADS);
+  String dir = await ExternalPath.getExternalStoragePublicDirectory(
+      ExternalPath.DIRECTORY_DOWNLOADS);
   print("dir $dir");
   String file = "$dir";
 
