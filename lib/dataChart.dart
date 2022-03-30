@@ -3,11 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:app_co2/DataVisualization.dart';
 import 'package:app_co2/exportCSV.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+
+int CO2_Data_chart = 0;
 
 class DataChart extends StatelessWidget {
   final List<ChartData> dataForPlot;
+  final BluetoothCharacteristic characteristic;
 
-  const DataChart({Key? key, required this.dataForPlot}) : super(key: key);
+  const DataChart(
+      {Key? key, required this.dataForPlot, required this.characteristic})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +34,36 @@ class DataChart extends StatelessWidget {
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                     )),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(CO2Data_2.toString(),
-                          style: GoogleFonts.catamaran(
-                            textStyle: TextStyle(
-                                color: Color.fromARGB(255, 26, 201, 19)),
-                            fontSize: 70,
-                            fontWeight: FontWeight.w700,
-                          )),
-                      Text(' ppm',
-                          style: GoogleFonts.catamaran(
-                            textStyle: TextStyle(
-                                color: Color.fromARGB(255, 26, 201, 19)),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ))
-                    ]),
+                StreamBuilder<List<int>>(
+                    stream: characteristic.value,
+                    initialData: characteristic.lastValue,
+                    builder: (c, snapshot) {
+                      final value = snapshot.data;
+                      CO2_Data_chart = returnInteger(value as List<int>);
+                      return Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(CO2_Data_chart.toString(),
+                                  style: GoogleFonts.catamaran(
+                                    textStyle: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 26, 201, 19)),
+                                    fontSize: 70,
+                                    fontWeight: FontWeight.w700,
+                                  )),
+                              Text(' ppm',
+                                  style: GoogleFonts.catamaran(
+                                    textStyle: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 26, 201, 19)),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                  ))
+                            ]),
+                      );
+                    }),
                 Container(
                   child: SfCartesianChart(series: <ChartSeries>[
                     // Renders line chart

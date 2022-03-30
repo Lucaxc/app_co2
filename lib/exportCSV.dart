@@ -5,6 +5,7 @@ import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:external_path/external_path.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 int CSV_count = 0;
 
@@ -78,11 +79,15 @@ void readFile() async {
 }
 
 void saveFile_correct(String csv) async {
+  Map<Permission, PermissionStatus> statuses = await [
+    Permission.storage,
+  ].request();
+
   String dir = await ExternalPath.getExternalStoragePublicDirectory(
       ExternalPath.DIRECTORY_DOWNLOADS);
   print("dir $dir");
   String file = "$dir";
 
-  File f = File(file + "/filename.csv");
+  File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
 }

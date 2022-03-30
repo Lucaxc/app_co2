@@ -10,9 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:async';
-import 'package:clock/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:csv/csv.dart';
+import 'package:wakelock/wakelock.dart';
 
 int time = 0;
 int CO2Data_000 = 0;
@@ -52,6 +52,7 @@ class LiveData {
 
 DateTime now = DateTime.now();
 String formattedDate = '';
+String formattedDate_export = '';
 //List<int> value = [];
 
 class DataVisualization extends StatelessWidget {
@@ -70,6 +71,7 @@ class DataVisualization extends StatelessWidget {
   Widget build(BuildContext context) {
     screen_width = MediaQuery.of(context).size.width;
     screen_height = MediaQuery.of(context).size.height;
+    Wakelock.enable();
     double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
         appBar: buildAppBar(),
@@ -104,10 +106,12 @@ class DataVisualization extends StatelessWidget {
                         now = DateTime.now();
                         formattedDate =
                             DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
+                        formattedDate_export =
+                            DateFormat('yyyy-MM-dd/kk:mm:ss').format(now);
 
                         //CSV setup
                         dataForCSV.addAll([
-                          [formattedDate, CO2Data_2.toString()]
+                          [formattedDate_export, CO2Data_2.toString()]
                         ]);
 
                         /* dataForPlot.addAll([
@@ -162,7 +166,7 @@ class DataVisualization extends StatelessWidget {
                                     ))
                               ]),
 
-                          Text(formattedDate.toString(),
+                          Text(formattedDate_export.toString(),
                               style: GoogleFonts.catamaran(
                                 textStyle: TextStyle(
                                     color: Color.fromARGB(255, 1, 38, 68)),
@@ -301,7 +305,7 @@ class DataVisualization extends StatelessWidget {
                                       .push(MaterialPageRoute(
                                           builder: (context) => ExportCSV(
                                                 dataForCSV: dataForCSV,
-                                                date: formattedDate,
+                                                date: formattedDate_export,
                                               ))),
                                   child: Text(
                                     '  EXPORT CSV  ',
@@ -330,11 +334,11 @@ class DataVisualization extends StatelessWidget {
                                       MediaQuery.of(context).size.width / 3,
                                   disabledColor:
                                       Color.fromARGB(255, 194, 167, 101),
-                                  onPressed: () => Navigator.of(context)
-                                      .push(MaterialPageRoute(
+                                  onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
                                           builder: (context) => DataChart(
-                                                dataForPlot: dataForPlot,
-                                              ))),
+                                              dataForPlot: dataForPlot,
+                                              characteristic: characteristic))),
                                   child: Text(
                                     'DATA CHART VISUALIZATION',
                                     style: GoogleFonts.catamaran(
