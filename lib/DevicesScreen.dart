@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/widgets.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:math';
+import 'package:wakelock/wakelock.dart';
 
 List<List<int>> value2 = [];
 List<int> results = [];
@@ -21,6 +22,7 @@ bool flag_sync = false;
 class DevicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Wakelock.disable();
     return Scaffold(
       appBar: buildAppBar(),
       body: StreamBuilder<BluetoothState>(

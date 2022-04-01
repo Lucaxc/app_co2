@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:PtCO2/DataVisualization.dart';
 import 'package:PtCO2/exportCSV.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:wakelock/wakelock.dart';
 
 int CO2_Data_chart = 0;
 
@@ -17,6 +18,7 @@ class DataChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Wakelock.enable();
     return Scaffold(
         appBar: buildAppBar(),
         backgroundColor: Colors.white,
