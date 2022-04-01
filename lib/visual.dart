@@ -1,7 +1,7 @@
 //Layout for data printing from DataVisualization
 
-import 'package:app_co2/DataVisualization.dart';
-import 'package:app_co2/widgets.dart';
+import 'package:PtCO2/DataVisualization.dart';
+import 'package:PtCO2/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_blue/flutter_blue.dart';

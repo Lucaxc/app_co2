@@ -1,10 +1,10 @@
-import 'package:app_co2/DataVisualization.dart';
-import 'package:app_co2/Visual_test.dart';
-import 'package:app_co2/Visual_test.dart';
+import 'package:PtCO2/DataVisualization.dart';
+import 'package:PtCO2/Visual_test.dart';
+import 'package:PtCO2/Visual_test.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:app_co2/widgets.dart';
+import 'package:PtCO2/widgets.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:math';
 
@@ -14,6 +14,9 @@ BluetoothDevice dummy_device = 'dummy_device' as BluetoothDevice;
 BluetoothService dummy_service = 'dummy_service' as BluetoothService;
 BluetoothCharacteristic dummy_characteristic =
     'dummy_characteristic' as BluetoothCharacteristic;
+
+bool flag_connected = false;
+bool flag_sync = false;
 
 class DevicesScreen extends StatelessWidget {
   @override
@@ -226,6 +229,7 @@ class DeviceScreen extends StatelessWidget {
                       await c.write([0, 0]);
                     },
                     onNotificationPressed: () async {
+                      flag_sync = true;
                       await c.setNotifyValue(!c.isNotifying);
                       //TODO: read again the value of the notifying bool to check when to stop acquisition
                       dummy_characteristic = c;
@@ -237,12 +241,13 @@ class DeviceScreen extends StatelessWidget {
                       print(dummy_device);
                       print('+++++++++++++++++++++++++++++++++');
                       //() => readCharacteristic(c),
+
+                      /*Check what is happening with the lines here below*/
                       List<int> value1 = await c.read();
                       int result = returnInteger(value1);
                       results.add(result);
                       value2.add(value1);
-                      //print(results);
-                      //print(value2);
+                      /******************************************/
                     },
                     descriptorTiles: c.descriptors
                         .map(
@@ -276,7 +281,8 @@ class DeviceScreen extends StatelessWidget {
               String text;
               switch (snapshot.data) {
                 case BluetoothDeviceState.connected:
-                  onPressed = () => device.disconnect();
+                  onPressed = () => checkDisconnection(device);
+                  //device.disconnect();
                   text = 'DISCONNECT';
                   break;
                 case BluetoothDeviceState.disconnected:
@@ -321,9 +327,9 @@ class DeviceScreen extends StatelessWidget {
                     index: snapshot.data! ? 1 : 0,
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: () => device.discoverServices(),
-                      ),
+                          icon: Icon(Icons.refresh),
+                          onPressed: () => //device.discoverServices(),
+                              checkConnection(device)),
                       IconButton(
                         icon: SizedBox(
                           child: CircularProgressIndicator(
@@ -367,13 +373,14 @@ class DeviceScreen extends StatelessWidget {
                 color: Color(0xFFFBC02D),
                 minWidth: 300.0,
                 disabledColor: Color.fromARGB(255, 194, 167, 101),
-                onPressed: () => Navigator.push(
+                onPressed: () => changeScreen(context),
+                /*Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => DataVisualization(
                             device: dummy_device,
                             service: dummy_service,
-                            characteristic: dummy_characteristic))),
+                            characteristic: dummy_characteristic))),*/
                 child: Text(
                   'DATA VISUALIZATION',
                   style: GoogleFonts.catamaran(
@@ -399,37 +406,81 @@ int returnInteger(List<int> data) {
   return converted;
 }
 
-//TODO: implement function that reads the value from the characteristic (the one below doesn't work perfectly)
-void readCharacteristic(BluetoothCharacteristic characteristic) async {
-  List<int> data = [];
-  characteristic.setNotifyValue(true);
+void checkConnection(BluetoothDevice device) {
+  device.discoverServices();
+  flag_connected = true;
+}
 
-  while (characteristic.isNotifying == true) {
-    List<int> value1 = await characteristic.read();
-    int result = returnInteger(value1);
-    results.add(result);
-    value2.add(value1);
-    print(results);
-    print(value2);
-    CharacteristicTile(
-      characteristic: characteristic,
-      onReadPressed: () => characteristic.read(),
-      onWritePressed: () async {
-        await characteristic.write([0, 0]);
-      },
-      onNotificationPressed: () async {
-        await characteristic.setNotifyValue(false);
-      },
-      descriptorTiles: characteristic.descriptors
-          .map(
-            (d) => DescriptorTile(
-              descriptor: d,
-              onReadPressed: () => d.read(),
-              onWritePressed: () => d.write([1, 1]),
-            ),
-          )
-          .toList(),
+//Prototype function not used
+void chechSynchronization(BluetoothDevice device) {
+  flag_sync = true;
+}
+
+void changeScreen(BuildContext context) {
+  if (flag_connected == true && flag_sync == true) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DataVisualization(
+                device: dummy_device,
+                service: dummy_service,
+                characteristic: dummy_characteristic)));
+  } else if (flag_connected == false && flag_sync == false) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        elevation: 10,
+        title: Text('ATTENTION',
+            style: GoogleFonts.catamaran(
+              textStyle: TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+            )),
+        content: Text(
+            'To visualize data, check the connection to the device or if the update button is pressed',
+            style: GoogleFonts.catamaran(
+              textStyle: TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            )),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Ok'),
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
+  } else if (flag_connected == true && flag_sync == false) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        elevation: 10,
+        title: Text('ATTENTION',
+            style: GoogleFonts.catamaran(
+              textStyle: TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+            )),
+        content: Text('To visualize data, press the synchronization button',
+            style: GoogleFonts.catamaran(
+              textStyle: TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            )),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Ok'),
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
     );
   }
-  //return data;
+}
+
+void checkDisconnection(BluetoothDevice device) {
+  flag_connected = false;
+  flag_sync = false;
+  device.disconnect();
 }

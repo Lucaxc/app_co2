@@ -1,9 +1,9 @@
-import 'package:app_co2/PrimaryButton.dart';
+import 'package:PtCO2/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:app_co2/easterEgg.dart';
+import 'package:PtCO2/easterEgg.dart';
 
-import 'package:app_co2/DevicesScreen.dart';
+import 'package:PtCO2/DevicesScreen.dart';
 
 class ScanningScreen extends StatelessWidget {
   @override

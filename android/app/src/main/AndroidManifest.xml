@@ -1,13 +1,13 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.app_co2"
+  package="com.example.PtCO2"
 >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
    <application
-    android:label="app_co2"
+    android:label="PtCO2"
     android:name="${applicationName}"
     android:requestLegacyExternalStorage="true"
     android:icon="@mipmap/ic_launcher"

@@ -1,10 +1,7 @@
-import 'dart:ffi';
 import 'dart:math';
 import 'dart:ui';
-import 'package:app_co2/Visual_test.dart';
-import 'package:app_co2/visual.dart';
-import 'package:app_co2/exportCSV.dart';
-import 'package:app_co2/dataChart.dart';
+import 'package:PtCO2/exportCSV.dart';
+import 'package:PtCO2/dataChart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -120,7 +117,7 @@ class DataVisualization extends StatelessWidget {
 
                         String csv =
                             const ListToCsvConverter().convert(dataForCSV);
-                        print('sasas');
+                        print('Device pixel ratio');
                         print(devicePixelRatio);
                         //Visual return
                         return Container(

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(app_co2 LANGUAGES CXX)
+project(PtCO2 LANGUAGES CXX)
 
-set(BINARY_NAME "app_co2")
+set(BINARY_NAME "PtCO2")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_co2/WelcomeScreen.dart';
+import 'package:PtCO2/WelcomeScreen.dart';
 
 void main() => runApp(MyApp());
 

@@ -1,4 +1,4 @@
-# app_co2
+# PtCO2
 
 A new Flutter project.
 This is an app that is capable of searching for BLE devices, connect to them and

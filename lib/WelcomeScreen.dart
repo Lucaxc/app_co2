@@ -1,4 +1,4 @@
-import 'package:app_co2/ScanningScreen.dart';
+import 'package:PtCO2/ScanningScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

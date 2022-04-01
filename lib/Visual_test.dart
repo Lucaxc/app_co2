@@ -5,8 +5,8 @@ import 'dart:ffi';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:app_co2/DevicesScreen.dart';
-import 'package:app_co2/widgets.dart';
+import 'package:PtCO2/DevicesScreen.dart';
+import 'package:PtCO2/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_blue/flutter_blue.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:app_co2/DataVisualization.dart';
-import 'package:app_co2/exportCSV.dart';
+import 'package:PtCO2/DataVisualization.dart';
+import 'package:PtCO2/exportCSV.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 int CO2_Data_chart = 0;
