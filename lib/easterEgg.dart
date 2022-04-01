@@ -29,6 +29,7 @@ class EasterEgg extends StatelessWidget {
                         width: (MediaQuery.of(context).size.width) * 4 / 5,
                         child: Text(
                             'Hi! If you are here it means that you have used long enough the app to press things randomly and find this easter egg. I\'m Luca and I\'ve developed this app as part of my work of thesis, hope you enjoyed it. HAVE FUN!',
+                            textAlign: TextAlign.justify,
                             style: GoogleFonts.catamaran(
                               textStyle: TextStyle(
                                   color: Color.fromARGB(255, 6, 80, 141),

@@ -21,11 +21,11 @@ class DataChart extends StatelessWidget {
         appBar: buildAppBar(),
         backgroundColor: Colors.white,
         body: Container(
-            child: Center(
+            child: SafeArea(
           child: SingleChildScrollView(
               child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                 Text('Measured CO2 value',
                     style: GoogleFonts.catamaran(
@@ -34,6 +34,7 @@ class DataChart extends StatelessWidget {
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                     )),
+                //Text(''),
                 StreamBuilder<List<int>>(
                     stream: characteristic.value,
                     initialData: characteristic.lastValue,
