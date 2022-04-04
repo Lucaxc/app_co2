@@ -1,8 +1,13 @@
+/*
+This is the second screen of the application, where information on connected device
+utilization are provided. Also copyright information tab is included. By pressing the
+search for BLE devices button the application moves to Devices Screen
+*/
+
 import 'package:PtCO2/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/easterEgg.dart';
-
 import 'package:PtCO2/DevicesScreen.dart';
 
 class ScanningScreen extends StatelessWidget {
@@ -15,12 +20,6 @@ class ScanningScreen extends StatelessWidget {
       children: <Widget>[
         Column(
           children: [
-            /*Spacer(),
-            Icon(
-              Icons.warning_amber_rounded,
-              color: Color.fromARGB(255, 91, 191, 238),
-              size: 110.0,
-            ),*/
             Spacer(flex: 2),
             TextButton(
                 child: Text("Hi!",

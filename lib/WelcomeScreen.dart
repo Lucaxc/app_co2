@@ -1,3 +1,9 @@
+/*
+This is the first screen of the application where PoliMi logo, name of the application
+and application executive logo are displayed. By pressing the skip button the application
+moves to Scanning Screen
+*/
+
 import 'package:PtCO2/ScanningScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +18,8 @@ class WelcomeScreen extends StatelessWidget {
               Widget>[
         Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Spacer(),
+
+          //PoliMi Logo
           Container(
               height: (MediaQuery.of(context).size.width) * 2 / 5,
               width: (MediaQuery.of(context).size.width) * 2 / 5,
@@ -20,6 +28,8 @@ class WelcomeScreen extends StatelessWidget {
                 child: Image.asset("assets/images/Logo_Politecnico_Milano.png"),
               )),
           Spacer(),
+
+          //App name
           Text("PtCO2 Monitor",
               textAlign: TextAlign.center,
               style: GoogleFonts.catamaran(
@@ -36,6 +46,8 @@ class WelcomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w300),
               )),
           Spacer(flex: 2),
+
+          //App executive logo
           Container(
               height: MediaQuery.of(context).size.width / 3,
               width: MediaQuery.of(context).size.width / 3,
@@ -44,6 +56,8 @@ class WelcomeScreen extends StatelessWidget {
                 child: Image.asset("assets/images/Intrologo.jpg"),
               )),
           Spacer(flex: 3),
+
+          //Skip button
           FittedBox(
               child: TextButton(
                   onPressed: () => Navigator.push(

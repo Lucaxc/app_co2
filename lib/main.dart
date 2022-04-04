@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:PtCO2/WelcomeScreen.dart';
+import 'package:workmanager/workmanager.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  /*
+  \brief: This function initializes a workmanager to run the application
+  in background
+  */
+  Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  Workmanager().registerOneOffTask("1", "simpleTask");
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -19,4 +28,10 @@ class _MyAppState extends State<MyApp> {
       home: WelcomeScreen(),
     );
   }
+}
+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    return Future.value(true);
+  });
 }

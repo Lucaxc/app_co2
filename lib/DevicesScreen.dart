@@ -1,7 +1,9 @@
-import 'package:PtCO2/DataVisualization.dart';
-import 'package:PtCO2/Visual_test.dart';
-import 'package:PtCO2/Visual_test.dart';
+/*
+This is the third scree of the application where found BLE devices are displayed and
+where it is possible to connect to them.
+*/
 
+import 'package:PtCO2/DataVisualization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/widgets.dart';
@@ -11,11 +13,14 @@ import 'package:wakelock/wakelock.dart';
 
 List<List<int>> value2 = [];
 List<int> results = [];
+
+//Dummy BLE variables where infos on the connected device are stored
 BluetoothDevice dummy_device = 'dummy_device' as BluetoothDevice;
 BluetoothService dummy_service = 'dummy_service' as BluetoothService;
 BluetoothCharacteristic dummy_characteristic =
     'dummy_characteristic' as BluetoothCharacteristic;
 
+//Variables to check the connection before visualizing data
 bool flag_connected = false;
 bool flag_sync = false;
 
@@ -47,12 +52,6 @@ class DevicesScreen extends StatelessWidget {
             fontSize: 23,
             fontWeight: FontWeight.w400,
           )),
-      /*  actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.update_rounded),
-        )
-      ],*/
     );
   }
 }
@@ -140,14 +139,6 @@ class FindDevicesScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w300),
                                         ),
                                       ));
-
-                                  /*RaisedButton(
-                                    child: Text('OPEN'),
-                                    onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                DeviceScreen(device: d))),
-                                  );*/
                                 }
                                 return Text(snapshot.data.toString());
                               },
@@ -206,16 +197,6 @@ class DeviceScreen extends StatelessWidget {
 
   final BluetoothDevice device;
 
-  /*List<int> _getRandomBytes() {
-    final math = Random();
-    return [
-      math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255)
-    ];
-  }*/
-
   List<Widget> _buildServiceTiles(List<BluetoothService> services) {
     dummy_device = device;
     return services
@@ -233,16 +214,10 @@ class DeviceScreen extends StatelessWidget {
                     onNotificationPressed: () async {
                       flag_sync = true;
                       await c.setNotifyValue(!c.isNotifying);
+
                       //TODO: read again the value of the notifying bool to check when to stop acquisition
                       dummy_characteristic = c;
                       dummy_service = s;
-                      print('+++++++++++++++++++++++++++++++++');
-                      //cercare di capire come stampare sti cosi maledetti
-                      print(dummy_characteristic);
-                      print(dummy_service);
-                      print(dummy_device);
-                      print('+++++++++++++++++++++++++++++++++');
-                      //() => readCharacteristic(c),
 
                       /*Check what is happening with the lines here below*/
                       List<int> value1 = await c.read();
@@ -418,6 +393,7 @@ void chechSynchronization(BluetoothDevice device) {
   flag_sync = true;
 }
 
+//Function that verifies if conditions to change the screen are met
 void changeScreen(BuildContext context) {
   if (flag_connected == true && flag_sync == true) {
     Navigator.push(

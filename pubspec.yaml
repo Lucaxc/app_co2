@@ -43,6 +43,7 @@ dependencies:
   permission_handler: ^9.2.0
   external_path: ^1.0.1
   wakelock: ^0.6.1+2
+  workmanager: ^0.4.1
 
 dev_dependencies:
   flutter_test:

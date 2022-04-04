@@ -36,7 +36,7 @@ class ExportCSV extends StatelessWidget {
                     Text('Recorded CO2 data ${CSV_count.toString()} - ${date}'),
                 trailing: IconButton(
                   icon: Icon(Icons.download),
-                  onPressed: () => saveFile_correct(csv),
+                  onPressed: () => saveFile(csv),
                 ),
               ),
               Text(csv.toString()),
@@ -65,6 +65,7 @@ updateCSVcount() {
   CSV_count = CSV_count + 1;
 }
 
+//To get directory path for the external storage folder
 Future<String> getFilePath() async {
   Directory? appDocumentsDirectory = await getExternalStorageDirectory();
   print(appDocumentsDirectory?.path); // 1
@@ -74,11 +75,7 @@ Future<String> getFilePath() async {
   return filePath;
 }
 
-void saveFile(String csv) async {
-  File file = File(await getFilePath()); // 1
-  file.writeAsString(csv); // 2
-}
-
+//To read files from storage
 void readFile() async {
   File file = File(await getFilePath()); // 1
   String fileContent = await file.readAsString(); // 2
@@ -86,7 +83,8 @@ void readFile() async {
   print('File Content: $fileContent');
 }
 
-void saveFile_correct(String csv) async {
+//To save files in local storage
+void saveFile(String csv) async {
   Map<Permission, PermissionStatus> statuses = await [
     Permission.storage,
   ].request();
