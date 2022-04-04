@@ -18,6 +18,7 @@ int CO2Data_0 = 0;
 int CO2Data_1 = 0;
 int CO2Data_2 = 0;
 double C02_Data_2_double = 0.0;
+int CSV_count = 0;
 
 List<List<String>> dataForCSV = [
   ['Time', 'CO2 Value']
@@ -298,12 +299,13 @@ class DataVisualization extends StatelessWidget {
                                       MediaQuery.of(context).size.width / 3,
                                   disabledColor:
                                       Color.fromARGB(255, 194, 167, 101),
-                                  onPressed: () => Navigator.of(context)
+                                  onPressed: () => exportCSV(context),
+                                  /*Navigator.of(context)
                                       .push(MaterialPageRoute(
                                           builder: (context) => ExportCSV(
                                                 dataForCSV: dataForCSV,
                                                 date: formattedDate_export,
-                                              ))),
+                                              ))),*/
                                   child: Text(
                                     '  EXPORT CSV  ',
                                     style: GoogleFonts.catamaran(
@@ -443,6 +445,7 @@ int returnInteger(List<int> data) {
 
 void clearData(
     List<List<String>> data1, List<ChartData> data2, context, int time) {
+  CSV_count = 0;
   data1.clear();
   data1 = [
     ['Time', 'CO2 Value']
@@ -450,6 +453,16 @@ void clearData(
   data2.clear();
   time = 0;
   Navigator.pop(context, 'Cancel');
+}
+
+void exportCSV(BuildContext context) {
+  CSV_count = CSV_count + 1;
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ExportCSV(
+            dataForCSV: dataForCSV,
+            date: formattedDate_export,
+            CSV_count: CSV_count,
+          )));
 }
 
 //OCRA: 251, 188, 88

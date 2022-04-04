@@ -7,13 +7,16 @@ import 'dart:io';
 import 'package:external_path/external_path.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-int CSV_count = 0;
-
 class ExportCSV extends StatelessWidget {
   final List<List<String>> dataForCSV;
   final String date;
+  final int CSV_count;
 
-  const ExportCSV({Key? key, required this.dataForCSV, required this.date})
+  const ExportCSV(
+      {Key? key,
+      required this.dataForCSV,
+      required this.date,
+      required this.CSV_count})
       : super(key: key);
 
   @override
@@ -36,7 +39,8 @@ class ExportCSV extends StatelessWidget {
                   onPressed: () => saveFile_correct(csv),
                 ),
               ),
-              Text(csv.toString())
+              Text(csv.toString()),
+              //StreamBuilder(builder: (context, snapshot) => updateCSVcount()),
             ],
           ),
         ),
@@ -55,6 +59,10 @@ class ExportCSV extends StatelessWidget {
           )),
     );
   }
+}
+
+updateCSVcount() {
+  CSV_count = CSV_count + 1;
 }
 
 Future<String> getFilePath() async {
