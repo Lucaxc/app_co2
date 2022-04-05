@@ -1,3 +1,4 @@
+import 'package:PtCO2/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/DataVisualization.dart';
@@ -18,6 +19,18 @@ class ExportCSV extends StatelessWidget {
       required this.date,
       required this.CSV_count})
       : super(key: key);
+
+  /*@override
+  void initState() {
+    //super.initState();
+    NotificationApi.init();
+    listenNotifications();
+  }
+
+  void listenNotifications() =>
+      NotificationApi.onNotifications.stream.listen(onClickedNotification);
+
+  void onClickedNotification(String? payload) => () {};*/
 
   @override
   Widget build(BuildContext context) {
@@ -96,4 +109,8 @@ void saveFile(String csv) async {
 
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
+  /*NotificationApi.showNotification(
+    title: 'Download Completed',
+    body: 'CSV file exported',
+  );*/
 }
