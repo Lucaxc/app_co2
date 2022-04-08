@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/easterEgg.dart';
 import 'package:PtCO2/DevicesScreen.dart';
+import 'package:PtCO2/CopyRight.dart';
 
 class ScanningScreen extends StatelessWidget {
   @override
@@ -20,7 +21,7 @@ class ScanningScreen extends StatelessWidget {
       children: <Widget>[
         Column(
           children: [
-            Spacer(flex: 2),
+            Spacer(flex: 1),
             TextButton(
                 child: Text("Hi!",
                     textAlign: TextAlign.center,
@@ -45,7 +46,29 @@ class ScanningScreen extends StatelessWidget {
                       fontSize: 25,
                       fontWeight: FontWeight.w400),
                 )),
-            Spacer(flex: 4),
+            Spacer(),
+            FittedBox(
+                child: TextButton(
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CopyRight())),
+                    child: Row(
+                      children: [
+                        Text("Copyright",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.catamaran(
+                                textStyle: TextStyle(
+                                    color: Color(0xFF424242),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w300))),
+                        SizedBox(width: 6),
+                        Icon(
+                          Icons.copyright,
+                          size: 15,
+                          color: Color(0xFF424242),
+                        ),
+                      ],
+                    ))),
+            Spacer(flex: 2),
             PrimaryButton(
               text: 'Search for BLE devices',
               press: () => Navigator.push(context,

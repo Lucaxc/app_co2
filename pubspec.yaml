@@ -44,6 +44,8 @@ dependencies:
   external_path: ^1.0.1
   wakelock: ^0.6.1+2
   workmanager: ^0.4.1
+  firebase_auth: ^3.3.13
+  firebase_storage: ^10.2.11
 
 dev_dependencies:
   flutter_test:

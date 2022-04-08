@@ -447,7 +447,7 @@ void clearData(
     List<List<String>> data1, List<ChartData> data2, context, int time) {
   CSV_count = 0;
   data1.clear();
-  data1 = [
+  dataForCSV = [
     ['Time', 'CO2 Value']
   ];
   data2.clear();

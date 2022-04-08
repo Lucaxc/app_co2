@@ -5,6 +5,7 @@ moves to Scanning Screen
 */
 
 import 'package:PtCO2/ScanningScreen.dart';
+import 'package:PtCO2/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -60,13 +61,11 @@ class WelcomeScreen extends StatelessWidget {
           //Skip button
           FittedBox(
               child: TextButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ScanningScreen())),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Wrapper())),
                   child: Row(
                     children: [
-                      Text("Skip",
+                      Text("Login",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.catamaran(
                               textStyle: TextStyle(
