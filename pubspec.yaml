@@ -46,6 +46,8 @@ dependencies:
   workmanager: ^0.4.1
   firebase_auth: ^3.3.13
   firebase_storage: ^10.2.11
+  firebase_core: ^1.14.0
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:

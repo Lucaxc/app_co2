@@ -10,8 +10,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/easterEgg.dart';
 import 'package:PtCO2/DevicesScreen.dart';
 import 'package:PtCO2/CopyRight.dart';
+import 'package:PtCO2/services/authService.dart';
+import 'package:PtCO2/wrapper.dart';
 
 class ScanningScreen extends StatelessWidget {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +78,14 @@ class ScanningScreen extends StatelessWidget {
               press: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DevicesScreen())),
               color: Color(0xFFFBC02D),
+              minWidth: (MediaQuery.of(context).size.width) * 5 / 7,
+            ),
+            PrimaryButton(
+              text: 'Sign out',
+              press: () async {
+                await _auth.signOut();
+              },
+              color: Color.fromARGB(2255, 1, 38, 68),
               minWidth: (MediaQuery.of(context).size.width) * 5 / 7,
             ),
             Spacer(),

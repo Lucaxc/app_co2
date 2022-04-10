@@ -30,9 +30,7 @@ class PrimaryButton extends StatelessWidget {
           text,
           style: GoogleFonts.catamaran(
             textStyle: TextStyle(
-                color: Color(0xFF1A237E),
-                fontSize: 15,
-                fontWeight: FontWeight.w300),
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w300),
           ),
         ));
   }
