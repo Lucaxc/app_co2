@@ -19,12 +19,14 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final passwordCheck = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    passwordCheck.dispose();
 
     super.dispose();
   }
@@ -33,6 +35,36 @@ class _SignUpState extends State<SignUp> {
     // Check if email and password are valid
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
+
+    if (passwordController.text.trim() != passwordCheck.text.trim()) {
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                elevation: 10,
+                title: Text('ATTENTION',
+                    style: GoogleFonts.catamaran(
+                      textStyle:
+                          TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                    )),
+                content: Text('Passwords must correspond',
+                    style: GoogleFonts.catamaran(
+                      textStyle:
+                          TextStyle(color: Color.fromARGB(255, 1, 38, 68)),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    )),
+                /*actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignUp())),
+                    child: const Text('OK'),
+                  ),
+                ],*/
+              ));
+      return;
+    }
 
     // Charging animation
     showDialog(
@@ -132,6 +164,22 @@ class _SignUpState extends State<SignUp> {
                                     ? 'Enter at least 6 characters'
                                     : null,
                           )),
+                          SizedBox(height: 40),
+                          Material(
+                              child: TextFormField(
+                            obscureText: true,
+                            controller: passwordCheck,
+                            cursorColor: Colors.grey,
+                            textInputAction: TextInputAction.next,
+                            decoration:
+                                InputDecoration(labelText: 'Confirm Password'),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) =>
+                                value != null && value.length < 6
+                                    ? 'Enter at least 6 characters'
+                                    : null,
+                          )),
                           SizedBox(height: 20),
                           RichText(
                               text: TextSpan(
@@ -155,6 +203,8 @@ class _SignUpState extends State<SignUp> {
                                     text: 'Sign In',
                                     style: GoogleFonts.catamaran(
                                         textStyle: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
                                             color: Color(0xFFFBC02D),
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -197,7 +247,7 @@ class _SignUpState extends State<SignUp> {
                                   MaterialPageRoute(
                                       builder: (context) => ScanningScreen())),
                               child: Text(
-                                ' Continue without login  ',
+                                ' Continue without Log In  ',
                                 style: GoogleFonts.catamaran(
                                   textStyle: TextStyle(
                                       color: Colors.white,
