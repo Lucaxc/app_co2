@@ -14,7 +14,10 @@ import 'package:PtCO2/CopyRight.dart';
 import 'package:PtCO2/services/authService.dart';
 import 'package:PtCO2/wrapper.dart';
 
-class ScanningScreen extends StatelessWidget {
+class ScanningScreenLogged extends StatelessWidget {
+  final AuthService _auth = AuthService();
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,7 @@ class ScanningScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const EasterEgg()))),
-            Text('Not signed in',
+            Text('Signed as ${user.email}',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.catamaran(
                   //textStyle: TextStyle(color: Colors.lightBlue),
@@ -115,6 +118,7 @@ class ScanningScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                   ),
                 )),
+
             Spacer(),
           ],
         )
