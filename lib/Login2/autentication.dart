@@ -2,9 +2,8 @@ import 'package:PtCO2/Login2/SignUp.dart';
 import 'package:PtCO2/Login2/forgotPassword.dart';
 import 'package:PtCO2/Login2/utils.dart';
 import 'package:PtCO2/ScanningScreen.dart';
-import 'package:PtCO2/WelcomeScreen.dart';
+import 'package:PtCO2/help.dart';
 import 'package:PtCO2/main.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,7 +105,7 @@ class _AutenticationState extends State<Autentication> {
                     SizedBox(height: 20),
                     RichText(
                         text: TextSpan(
-                            text: 'No account? ',
+                            text: 'New to PtCO2? ',
                             style: GoogleFonts.catamaran(
                               textStyle: TextStyle(
                                   color: Color.fromARGB(255, 1, 38, 68),
@@ -120,7 +119,7 @@ class _AutenticationState extends State<Autentication> {
                                 ..onTap = () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) => SignUp())),
-                              text: 'Sign Up',
+                              text: 'Register',
                               style: GoogleFonts.catamaran(
                                   textStyle: TextStyle(
                                       decoration: TextDecoration.underline,
@@ -130,7 +129,7 @@ class _AutenticationState extends State<Autentication> {
                                               25,
                                       fontWeight: FontWeight.w400)))
                         ])),
-                    SizedBox(height: 40),
+                    SizedBox(height: 30),
                     MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius:
@@ -171,7 +170,7 @@ class _AutenticationState extends State<Autentication> {
                                 fontWeight: FontWeight.w400),
                           ),
                         )),
-                    SizedBox(height: 50),
+                    SizedBox(height: 30),
                     RichText(
                         text: TextSpan(
                             text: 'Forgot your ',
@@ -190,6 +189,43 @@ class _AutenticationState extends State<Autentication> {
                                         builder: (context) =>
                                             ForgotPassword())),
                               text: 'password',
+                              style: GoogleFonts.catamaran(
+                                  textStyle: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Color(0xFFFBC02D),
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      fontWeight: FontWeight.w400))),
+                          TextSpan(
+                            text: '?',
+                            style: GoogleFonts.catamaran(
+                              textStyle: TextStyle(
+                                  color: Color.fromARGB(255, 1, 38, 68),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          )
+                        ])),
+                    SizedBox(height: 10),
+                    RichText(
+                        text: TextSpan(
+                            text: 'Need ',
+                            style: GoogleFonts.catamaran(
+                              textStyle: TextStyle(
+                                  color: Color.fromARGB(255, 1, 38, 68),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            children: [
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => HelpWidget())),
+                              text: 'HELP',
                               style: GoogleFonts.catamaran(
                                   textStyle: TextStyle(
                                       decoration: TextDecoration.underline,

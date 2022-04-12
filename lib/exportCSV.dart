@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:external_path/external_path.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:PtCO2/api/upload_api.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ExportCSV extends StatelessWidget {
   final List<List<String>> dataForCSV;
@@ -97,7 +99,8 @@ void readFile() async {
 }
 
 //To save files in local storage
-void saveFile(String csv) async {
+Future saveFile(String csv) async {
+  final user = FirebaseAuth.instance.currentUser!;
   Map<Permission, PermissionStatus> statuses = await [
     Permission.storage,
   ].request();
@@ -109,6 +112,10 @@ void saveFile(String csv) async {
 
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
+
+  final destination =
+      '${user.email}/files/CO2_data_exported${CSV_count.toString()}';
+  FirebaseApi.uploadFile(destination, f);
   /*NotificationApi.showNotification(
     title: 'Download Completed',
     body: 'CSV file exported',

@@ -4,7 +4,6 @@ utilization are provided. Also copyright information tab is included. By pressin
 search for BLE devices button the application moves to Devices Screen
 */
 
-import 'package:PtCO2/PrimaryButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

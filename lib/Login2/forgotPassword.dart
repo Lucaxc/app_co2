@@ -42,12 +42,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   color: Color.fromARGB(255, 1, 38, 68),
                 ),
                 SizedBox(height: 20),
-                Text("Insert email to reset password",
+                Text(
+                    "Insert your email address\nto reset the password.\nWe will send you and email\nwith the instructions to set\na new password",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.catamaran(
                       textStyle: TextStyle(
                           color: Color.fromARGB(255, 6, 80, 141),
-                          fontSize: 25,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400),
                     )),
                 SizedBox(height: 40),
