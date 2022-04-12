@@ -1,7 +1,10 @@
+import 'package:PtCO2/pdfviewerCV.dart';
+import 'package:PtCO2/pdfviewerUG.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/gestures.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class HelpWidget extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -63,6 +66,42 @@ class HelpWidget extends StatelessWidget {
               SizedBox(
                 //height: (MediaQuery.of(context).size.width) * 4 / 5,
                 width: (MediaQuery.of(context).size.width) * 4 / 5,
+                child: Text('About me:',
+                    textAlign: TextAlign.justify,
+                    style: GoogleFonts.catamaran(
+                      textStyle: TextStyle(
+                          color: Color.fromARGB(255, 1, 38, 68),
+                          fontSize: MediaQuery.of(context).size.width / 20,
+                          fontWeight: FontWeight.w300),
+                    )),
+              ),
+              RichText(
+                  text: TextSpan(
+                      text: '',
+                      style: GoogleFonts.catamaran(
+                        textStyle: TextStyle(
+                            color: Color.fromARGB(255, 1, 38, 68),
+                            fontSize: MediaQuery.of(context).size.width / 25,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      children: [
+                    TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => pdfViewerCV())),
+                        text: 'Luca Colombo\n',
+                        style: GoogleFonts.catamaran(
+                            textStyle: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Color(0xFFFBC02D),
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 22,
+                                fontWeight: FontWeight.w400)))
+                  ])),
+              SizedBox(
+                //height: (MediaQuery.of(context).size.width) * 4 / 5,
+                width: (MediaQuery.of(context).size.width) * 4 / 5,
                 child: Text('Donations for the project:',
                     textAlign: TextAlign.justify,
                     style: GoogleFonts.catamaran(
@@ -119,10 +158,10 @@ class HelpWidget extends StatelessWidget {
                       children: [
                     TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => launch(
-                              'https://paypal.me/LucaColomboxc?country.x=IT&locale.x=it_IT'),
-                        text:
-                            'https://paypal.me/LucaColomboxc\n?country.x=IT&locale.x=it_IT\n',
+                          ..onTap = () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => pdfViewerUG())),
+                        text: 'User Guide PDF',
                         style: GoogleFonts.catamaran(
                             textStyle: TextStyle(
                                 decoration: TextDecoration.underline,

@@ -113,9 +113,11 @@ Future saveFile(String csv) async {
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
 
-  final destination =
-      '${user.email}/files/CO2_data_exported${CSV_count.toString()}';
-  FirebaseApi.uploadFile(destination, f);
+  if (user.email != null) {
+    final destination =
+        '${user.email}/files/CO2_data_exported${CSV_count.toString()}';
+    FirebaseApi.uploadFile(destination, f);
+  }
   /*NotificationApi.showNotification(
     title: 'Download Completed',
     body: 'CSV file exported',
