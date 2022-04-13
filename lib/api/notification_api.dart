@@ -1,4 +1,4 @@
-/*import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NotificationApi {
@@ -15,7 +15,7 @@ class NotificationApi {
         iOS: IOSNotificationDetails());
   }
 
-  static Future init({bool initScheduled = false}) async {
+  /*static Future init({bool initScheduled = false}) async {
     final android = AndroidInitializationSettings('@ipmap/ic_launcher');
     final iOS = IOSInitializationSettings();
     final settings = InitializationSettings(android: android, iOS: iOS);
@@ -24,19 +24,19 @@ class NotificationApi {
         onSelectNotification: (payload) async {
       onNotifications.add(payload);
     });
-  }
+  }*/
 
   static Future showNotification({
     int id = 0,
     String? title,
     String? body,
-    String? payload,
+    //String? payload,
   }) async =>
       _notifications.show(
         id,
         title,
         body,
         await _notificationDetails(),
-        payload: payload,
+        //payload: payload,
       );
-}*/
+}

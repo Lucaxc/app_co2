@@ -1,4 +1,4 @@
-import 'package:PtCO2/notification_api.dart';
+import 'package:PtCO2/api/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:PtCO2/DataVisualization.dart';
@@ -100,7 +100,6 @@ void readFile() async {
 
 //To save files in local storage
 Future saveFile(String csv) async {
-  final user = FirebaseAuth.instance.currentUser!;
   Map<Permission, PermissionStatus> statuses = await [
     Permission.storage,
   ].request();
@@ -113,13 +112,16 @@ Future saveFile(String csv) async {
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
 
+  final user = FirebaseAuth.instance.currentUser!;
   if (user.email != null) {
     final destination =
         '${user.email}/files/CO2_data_exported${CSV_count.toString()}';
     FirebaseApi.uploadFile(destination, f);
   }
-  /*NotificationApi.showNotification(
+
+  //TODO: have a working notification below
+  NotificationApi.showNotification(
     title: 'Download Completed',
     body: 'CSV file exported',
-  );*/
+  );
 }
