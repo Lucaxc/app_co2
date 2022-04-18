@@ -10,6 +10,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:PtCO2/api/upload_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+String date_export = '';
+
 class ExportCSV extends StatelessWidget {
   final List<List<String>> dataForCSV;
   final String date;
@@ -37,6 +39,7 @@ class ExportCSV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String csv = const ListToCsvConverter().convert(dataForCSV);
+    date_export = date;
 
     return Scaffold(
       appBar: buildAppBar(),
@@ -115,13 +118,13 @@ Future saveFile(String csv) async {
   final user = FirebaseAuth.instance.currentUser!;
   if (user.email != null) {
     final destination =
-        '${user.email}/files/CO2_data_exported${CSV_count.toString()}';
+        '${user.email}/files/CO2_data_exported - ${date_export}';
     FirebaseApi.uploadFile(destination, f);
   }
 
   //TODO: have a working notification below
-  NotificationApi.showNotification(
+  /*NotificationApi.showNotification(
     title: 'Download Completed',
     body: 'CSV file exported',
-  );
+  );*/
 }

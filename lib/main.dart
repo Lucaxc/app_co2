@@ -6,8 +6,6 @@ import 'package:PtCO2/WelcomeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:PtCO2/models/user.dart';
-import 'package:PtCO2/Login2/utils.dart';
 
 void main() async {
   /*

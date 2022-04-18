@@ -1,15 +1,17 @@
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+/*import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NotificationApi {
   static final _notifications = FlutterLocalNotificationsPlugin();
-  static final onNotifications = BehaviorSubject<String?>();
+  //static final onNotifications = BehaviorSubject<String?>();
 
   static Future _notificationDetails() async {
     return NotificationDetails(
         android: AndroidNotificationDetails(
           'channel id',
           'channel name',
+          channelDescription: 'channel description',
+          //icon: '@ipmap/ic_launcher',
           importance: Importance.max,
         ),
         iOS: IOSNotificationDetails());
@@ -30,13 +32,13 @@ class NotificationApi {
     int id = 0,
     String? title,
     String? body,
-    //String? payload,
+    String? payload,
   }) async =>
       _notifications.show(
         id,
         title,
         body,
         await _notificationDetails(),
-        //payload: payload,
+        payload: payload,
       );
-}
+}*/
