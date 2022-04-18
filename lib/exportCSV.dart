@@ -123,8 +123,10 @@ Future saveFile(String csv) async {
   }
 
   //TODO: have a working notification below
-  /*NotificationApi.showNotification(
-    title: 'Download Completed',
-    body: 'CSV file exported',
-  );*/
+  NotificationApi.showNotification(
+    body: 'The file is saved in the DOWNLOAD folder',
+    id: 0,
+    title: 'CSV Export complete',
+    payload: 'payload',
+  );
 }
