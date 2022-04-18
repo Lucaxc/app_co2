@@ -1,13 +1,16 @@
 import 'package:PtCO2/Login2/SignUp.dart';
 import 'package:PtCO2/Login2/forgotPassword.dart';
+import 'package:PtCO2/Login2/googleLogIn.dart';
 import 'package:PtCO2/Login2/utils.dart';
 import 'package:PtCO2/ScanningScreen.dart';
 import 'package:PtCO2/help.dart';
 import 'package:PtCO2/main.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class Autentication extends StatefulWidget {
   @override
@@ -138,16 +141,52 @@ class _AutenticationState extends State<Autentication> {
                         minWidth: (MediaQuery.of(context).size.width) * 6 / 7,
                         disabledColor: Color.fromARGB(255, 194, 167, 101),
                         onPressed: signIn,
-                        child: Text(
-                          '  Sign in  ',
-                          style: GoogleFonts.catamaran(
-                            textStyle: TextStyle(
-                                color: Color.fromARGB(255, 1, 38, 68),
-                                fontSize:
-                                    MediaQuery.of(context).size.width / 25,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '  Sign in  ',
+                                style: GoogleFonts.catamaran(
+                                  textStyle: TextStyle(
+                                      color: Color.fromARGB(255, 1, 38, 68),
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              )
+                            ])),
+                    SizedBox(height: 20),
+                    MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(40))),
+                        color: Colors.white,
+                        minWidth: (MediaQuery.of(context).size.width) * 6 / 7,
+                        disabledColor: Color.fromARGB(255, 194, 167, 101),
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(FontAwesomeIcons.google,
+                                  color: Color(0xFFFBC02D), size: 20),
+                              Text(
+                                '   Sign in with Google',
+                                style: GoogleFonts.catamaran(
+                                  textStyle: TextStyle(
+                                      color: Color.fromARGB(2255, 1, 38, 68),
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              )
+                            ])),
                     SizedBox(height: 20),
                     MaterialButton(
                         shape: RoundedRectangleBorder(
@@ -160,16 +199,21 @@ class _AutenticationState extends State<Autentication> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ScanningScreen())),
-                        child: Text(
-                          ' Continue without Log In  ',
-                          style: GoogleFonts.catamaran(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.width / 25,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                ' Continue without Log In  ',
+                                style: GoogleFonts.catamaran(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              )
+                            ])),
                     SizedBox(height: 30),
                     RichText(
                         text: TextSpan(

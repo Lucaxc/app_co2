@@ -3,6 +3,7 @@ import 'package:rxdart/rxdart.dart';
 
 class NotificationApi {
   static final _notifications = FlutterLocalNotificationsPlugin();
+  static final onNotifications = BehaviorSubject<String?>();
 
   static Future _notificationDetails() async {
     return NotificationDetails(
@@ -23,7 +24,7 @@ class NotificationApi {
 
     await _notifications.initialize(settings,
         onSelectNotification: (payload) async {
-      //onNotifications.add(payload);
+      onNotifications.add(payload);
     });
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:PtCO2/api/notification_api.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -16,7 +17,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     await FirebaseAuth.instance
         .sendPasswordResetEmail(email: emailController.text.trim());
 
-    Utils.showSnackBar('Email sent');
+    //Utils.showSnackBar('Email sent');
+    NotificationApi.showNotification(
+      body: 'You will soon receive an email to restore the password',
+      id: 1,
+      title: 'Email sent',
+      payload: 'payload',
+    );
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:PtCO2/ScanningScreen.dart';
 import 'package:PtCO2/api/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import 'package:external_path/external_path.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:PtCO2/api/upload_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:file_picker/file_picker.dart';
 
 String date_export = '';
 
@@ -24,17 +26,29 @@ class ExportCSV extends StatelessWidget {
       required this.CSV_count})
       : super(key: key);
 
-  /*@override
+  @override
   void initState() {
     //super.initState();
     NotificationApi.init();
     listenNotifications();
   }
 
+  Future<File?> pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return null;
+
+    return File(result.files.first.path!);
+  }
+
+  Future openFile() async {
+    final file = await pickFile();
+  }
+
   void listenNotifications() =>
       NotificationApi.onNotifications.stream.listen(onClickedNotification);
 
-  void onClickedNotification(String? payload) => () {};*/
+  void onClickedNotification(String? payload) => print(
+      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++notification pressed');
 
   @override
   Widget build(BuildContext context) {
@@ -115,18 +129,18 @@ Future saveFile(String csv) async {
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
 
+  //TODO: have a working notification below (FIXED)
+  NotificationApi.showNotification(
+    body: 'The file is saved in the DOWNLOAD folder',
+    id: 0,
+    title: 'CSV Export completed',
+    payload: 'payload2',
+  );
+
   final user = FirebaseAuth.instance.currentUser!;
   if (user.email != null) {
     final destination =
         '${user.email}/files/CO2_data_exported - ${date_export}';
     FirebaseApi.uploadFile(destination, f);
   }
-
-  //TODO: have a working notification below
-  NotificationApi.showNotification(
-    body: 'The file is saved in the DOWNLOAD folder',
-    id: 0,
-    title: 'CSV Export complete',
-    payload: 'payload',
-  );
 }
