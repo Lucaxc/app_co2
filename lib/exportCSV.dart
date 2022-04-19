@@ -129,9 +129,10 @@ Future saveFile(String csv) async {
   File f = File(file + "/CO2_data_exported.csv");
   f.writeAsString(csv);
 
-  //TODO: have a working notification below (FIXED)
+  // ignore: todo
+  //TODO: have a working notification below (FIXED): This is for local storage
   NotificationApi.showNotification(
-    body: 'The file is saved in the DOWNLOAD folder',
+    body: 'The file has been saved in the DOWNLOAD folder',
     id: 0,
     title: 'CSV Export completed',
     payload: 'payload2',
@@ -143,4 +144,12 @@ Future saveFile(String csv) async {
         '${user.email}/files/CO2_data_exported - ${date_export}';
     FirebaseApi.uploadFile(destination, f);
   }
+
+  //TODO: have a working notification below (FIXED): This is for FIREBASE storage
+  NotificationApi.showNotification(
+    body: 'The file has been saved on Google Firebase',
+    id: 1,
+    title: 'CSV Export completed',
+    payload: 'payload2',
+  );
 }

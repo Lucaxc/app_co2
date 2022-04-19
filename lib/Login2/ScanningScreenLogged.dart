@@ -4,6 +4,7 @@ utilization are provided. Also copyright information tab is included. By pressin
 search for BLE devices button the application moves to Devices Screen
 */
 
+import 'package:PtCO2/Login2/googleLogIn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ import 'package:PtCO2/DevicesScreen.dart';
 import 'package:PtCO2/CopyRight.dart';
 import 'package:PtCO2/services/authService.dart';
 import 'package:PtCO2/wrapper.dart';
+import 'package:provider/provider.dart';
 
 class ScanningScreenLogged extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -19,6 +21,14 @@ class ScanningScreenLogged extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Function to disconnect from Firebase either with credentials or with Google account
+    void disconnect() {
+      final provider =
+          Provider.of<GoogleSignInProvider>(context, listen: false);
+      provider.logout();
+      FirebaseAuth.instance.signOut();
+    }
+
     return Scaffold(
         body: SafeArea(
             child: Row(
@@ -107,7 +117,8 @@ class ScanningScreenLogged extends StatelessWidget {
                 color: Color.fromARGB(2255, 1, 38, 68),
                 minWidth: (MediaQuery.of(context).size.width) * 6 / 7,
                 disabledColor: Color.fromARGB(255, 194, 167, 101),
-                onPressed: () => FirebaseAuth.instance.signOut(),
+                onPressed: () => disconnect(),
+                //FirebaseAuth.instance.signOut(),
                 child: Text(
                   ' Log out  ',
                   style: GoogleFonts.catamaran(
@@ -117,7 +128,6 @@ class ScanningScreenLogged extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                   ),
                 )),
-
             Spacer(),
           ],
         )
