@@ -1,4 +1,5 @@
 import 'package:PtCO2/Login2/autentication.dart';
+import 'package:PtCO2/Login2/verifyemail.dart';
 import 'package:PtCO2/ScanningScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +13,7 @@ class Wrapper2 extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ScanningScreenLogged();
+              return VerifyEmail(); //ScanningScreenLogged();
             } else {
               return Autentication();
             }
