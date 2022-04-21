@@ -1,4 +1,3 @@
-import 'package:PtCO2/ScanningScreen.dart';
 import 'package:PtCO2/api/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:PtCO2/api/upload_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 
 String date_export = '';
 
@@ -33,22 +33,32 @@ class ExportCSV extends StatelessWidget {
     listenNotifications();
   }
 
-  Future<File?> pickFile() async {
+/*   Future<File?> pickFile() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) return null;
 
     return File(result.files.first.path!);
-  }
+  } 
 
   Future openFile() async {
     final file = await pickFile();
-  }
+  }*/
 
   void listenNotifications() =>
       NotificationApi.onNotifications.stream.listen(onClickedNotification);
 
-  void onClickedNotification(String? payload) => print(
-      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++notification pressed');
+  void onClickedNotification(String? payload) async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+
+    //Open single file
+    final file_open = result.files.first;
+    print('Name: ${file_open.name}');
+    print('Path: ${file_open.path}');
+    openSingleFile(file_open);
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++notification pressed');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +81,31 @@ class ExportCSV extends StatelessWidget {
                   onPressed: () => saveFile(csv),
                 ),
               ),
+              MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(40))),
+                  color: Color(0xFFFBC02D),
+                  minWidth: (MediaQuery.of(context).size.width) * 6 / 7,
+                  disabledColor: Color.fromARGB(255, 194, 167, 101),
+                  onPressed: () async {
+                    final result = await FilePicker.platform.pickFiles();
+                    if (result == null) return;
+
+                    //Open single file
+                    final file = result.files.first;
+                    print('Name: ${file.name}');
+                    print('Path: ${file.path}');
+                    openSingleFile(file);
+                  },
+                  child: Text(
+                    '  Pick file  ',
+                    style: GoogleFonts.catamaran(
+                      textStyle: TextStyle(
+                          color: Color.fromARGB(255, 1, 38, 68),
+                          fontSize: MediaQuery.of(context).size.width / 25,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )),
               Text(csv.toString()),
               //StreamBuilder(builder: (context, snapshot) => updateCSVcount()),
             ],
@@ -91,6 +126,11 @@ class ExportCSV extends StatelessWidget {
           )),
     );
   }
+}
+
+//To open single files (open_files library imported)
+void openSingleFile(PlatformFile file) {
+  OpenFile.open(file.path!);
 }
 
 updateCSVcount() {
@@ -145,6 +185,7 @@ Future saveFile(String csv) async {
     FirebaseApi.uploadFile(destination, f);
   }
 
+  // ignore: todo
   //TODO: have a working notification below (FIXED): This is for FIREBASE storage
   NotificationApi.showNotification(
     body: 'The file has been saved on Google Firebase',
